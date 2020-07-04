@@ -37,7 +37,7 @@ int main()
 	sf::VertexArray va(sf::Quads);
 
 	for (float x(WinWidth * 0.0f); x < WinWidth; x += 1.0f) {
-		grass.push_back(Grass::add(solver, x, WinHeight + 50.0f));
+		grass.push_back(Grass::add(solver, x, WinHeight + 120.0f));
 	}
 
 	for (float x(WinWidth*0.0f); x < WinWidth; x += 100.0f) {

@@ -84,7 +84,7 @@ public:
 			const float dist = v.getLength();
 			const Vec2 normalized = v.getNormalized();
 			if (dist < radius) {
-				pt->move(0.01f * (radius - dist) * v);
+				pt->move(0.001f * (radius - dist) * v);
 			}
 		}
 	}

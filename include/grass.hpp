@@ -13,19 +13,19 @@ struct Grass
 	{
 		Grass grass;
 
-		float strength = 0.015f;
-		float link_length = 50.0f + rand() % 50;
-		const uint32_t points_count = 5;
+		float strength = 0.01f;
+		float link_length = 70.0f + rand() % 70;
+		const uint32_t points_count = 7;
 		VerletPoint::ptr last_point = solver.createPoint(x, y, 1.0f, false);
 		grass.points.push_back(last_point);
 		Link::ptr last_link = nullptr;
 		for (uint32_t i(0); i < points_count; ++i) {
-			VerletPoint::ptr new_point = solver.createPoint(last_point->coords.x, last_point->coords.y - link_length, 0.02f / float(i + 1), i > 0);
+			VerletPoint::ptr new_point = solver.createPoint(last_point->coords.x, last_point->coords.y - link_length, 0.01f / float(i + 1), i > 0);
 			grass.points.push_back(new_point);
 			Link::ptr new_link = solver.createLink(last_point, new_point);
 			last_point = new_point;
 			if (i > 0) {
-				solver.createJoin(last_link, new_link, getRandRange(0.1f), strength);
+				solver.createJoin(last_link, new_link, getRandRange(0.2f), strength);
 				strength *= 2.0f;
 			}
 			link_length *= 0.8f;
