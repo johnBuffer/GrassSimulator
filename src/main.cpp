@@ -11,7 +11,7 @@
 
 int main()
 {
-	srand(time(0));
+	srand(static_cast<uint32_t>(time(0)));
 
     constexpr uint32_t WinWidth = 1920;
 	constexpr uint32_t WinHeight = 1080;
@@ -20,8 +20,8 @@ int main()
 	settings.antialiasingLevel = 8;
 	
     sf::RenderWindow window(sf::VideoMode(WinWidth, WinHeight), "Tree", sf::Style::Fullscreen, settings);
-	window.setVerticalSyncEnabled(true);
-	//window.setFramerateLimit(60);
+	//window.setVerticalSyncEnabled(true);
+	window.setFramerateLimit(144);
 
 	float time = 0.0f;
 	bool wind = false;
@@ -34,7 +34,6 @@ int main()
 	std::vector<Wind> winds(4);
 
 	Solver solver;
-
 	sf::VertexArray va(sf::Quads);
 
 	for (float x(WinWidth * 0.0f); x < WinWidth; x += 1.0f) {
@@ -45,14 +44,11 @@ int main()
 		Tree::add(solver, x, WinHeight);
 	}
 
-	VerletPoint::ptr selected_point = nullptr;
-
 	bool force = false;
 
 	while (window.isOpen())
 	{
 		auto mouse_pos = sf::Mouse::getPosition(window);
-		//p2->moveTo(mouse_pos.x, mouse_pos.y);
 
 		time += 0.008f;
         sf::Event event;
@@ -68,29 +64,15 @@ int main()
 				}
 			}
 			else if (event.type == sf::Event::MouseButtonReleased) {
-				if (event.mouseButton.button == sf::Mouse::Left) {
-					selected_point = nullptr;
-				}
-				else {
-					force = false;
-				}
+				force = false;
 			}
 			else if (event.type == sf::Event::MouseButtonPressed) {
-				if (event.mouseButton.button == sf::Mouse::Left) {
-					selected_point = solver.getPointAt(mouse_pos.x, mouse_pos.y);
-				}
-				else {
-					force = true;
-				}
+				force = true;
 			}
 		}
 
 		if (force) {
-			solver.applyForce(150.0f, mouse_pos.x, mouse_pos.y);
-		}
-
-		if (selected_point) {
-			selected_point->moveTo(mouse_pos.x, mouse_pos.y, true);
+			solver.applyForce(150.0f, static_cast<float>(mouse_pos.x), static_cast<float>(mouse_pos.y));
 		}
 
 		if (wind) {

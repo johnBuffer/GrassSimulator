@@ -6,7 +6,7 @@ struct Grass
 {
 	Grass()
 	{
-		color = sf::Color(0.0f, 100 + rand()%100, 0);
+		color = sf::Color(0, 100 + rand()%100, 0);
 	}
 
 	static Grass add(Solver& solver, float x, float y)

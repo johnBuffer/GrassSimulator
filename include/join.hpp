@@ -46,7 +46,7 @@ struct Join
 
 		const float current_angle = getVec2Angle(v1, v2);
 		const float delta_angle = (target_angle - current_angle);
-		float da;
+		// Enable damages
 		/*if (std::abs(delta_angle) > 0.25f * PI) {
 			target_angle -= sign(delta_angle) * 0.025f;
 		}*/
