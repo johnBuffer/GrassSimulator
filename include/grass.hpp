@@ -15,7 +15,7 @@ struct Grass
 
 		float strength = 0.01f;
 		float link_length = 70.0f + rand() % 70;
-		const uint32_t points_count = 7;
+		const uint32_t points_count = 4;
 		VerletPoint::ptr last_point = solver.createPoint(x, y, 1.0f, false);
 		grass.points.push_back(last_point);
 		Link::ptr last_link = nullptr;
@@ -26,7 +26,7 @@ struct Grass
 			last_point = new_point;
 			if (i > 0) {
 				solver.createJoin(last_link, new_link, getRandRange(0.2f), strength);
-				strength *= 2.0f;
+				strength *= 3.0f;
 			}
 			link_length *= 0.8f;
 			last_link = new_link;
@@ -37,7 +37,7 @@ struct Grass
 
 	void addToVa(sf::VertexArray& va)
 	{
-		const float initial_width = 12.0f;
+		const float initial_width = 4.0f;
 		float width = initial_width;
 		const uint64_t points_count = points.size();
 		for (uint32_t i(0); i < points_count - 1; ++i) {
