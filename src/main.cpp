@@ -13,13 +13,13 @@ int main()
 {
 	srand(static_cast<uint32_t>(time(0)));
 
-    constexpr uint32_t WinWidth = 1920;
-	constexpr uint32_t WinHeight = 1080;
+    constexpr uint32_t WinWidth = 1600;
+	constexpr uint32_t WinHeight = 900;
 
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
 	
-    sf::RenderWindow window(sf::VideoMode(WinWidth, WinHeight), "Grass", sf::Style::Fullscreen, settings);
+    sf::RenderWindow window(sf::VideoMode(WinWidth, WinHeight), "Grass", sf::Style::Default, settings);
 	//window.setVerticalSyncEnabled(true);
 	window.setFramerateLimit(144);
 
@@ -36,13 +36,11 @@ int main()
 	Solver solver;
 	sf::VertexArray va(sf::Quads);
 
-	for (float x(WinWidth * 0.0f); x < WinWidth; x += 1.0f) {
+	/*for (float x(WinWidth * 0.0f); x < WinWidth; x += 2.5f) {
 		grass.push_back(Grass::add(solver, x, WinHeight + 150.0f));
-	}
-
-	for (float x(WinWidth*0.0f); x < WinWidth; x += 100.0f) {
-		Tree::add(solver, x, WinHeight);
-	}
+	}*/
+		
+	Tree::add(solver, WinWidth * 0.5f, WinHeight);
 
 	bool force = false;
 
@@ -84,15 +82,15 @@ int main()
 
 		solver.update();
 
-		va.clear();
+		/*va.clear();
 		for (Grass& g : grass) {
 			g.addToVa(va);
-		}
+		}*/
 
 		window.clear(sf::Color::Black);
 
-		//solver.render(window);
-		window.draw(va);
+		solver.render(window);
+		//window.draw(va);
 
         window.display();
     }

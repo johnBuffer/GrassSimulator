@@ -4,8 +4,8 @@
 
 const float branch_length = 250.0f;
 const float branch_length_reduction = 0.7f;
-const uint32_t max_depth = 6;
-const uint32_t fork_count = 3;
+const uint32_t max_depth = 7;
+const uint32_t fork_count = 2;
 const float fork_angle = 3.141592653f * 0.5f;
 
 
